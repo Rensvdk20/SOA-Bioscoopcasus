@@ -1,20 +1,33 @@
-﻿using System;
-
-public class MovieTicket
+﻿namespace SOA_BioscoopCasus.Domain
 {
-	public MovieTicket()
-	{
-		private int rowNr;
-		private int seatNr;
-		private bool isPremium;
-		
-		public MovieTicket (int rowNr, int seatNr, bool isPremium)
-	{
-		this.rowNr = rowNr;
-		this.seatNr = seatNr;
-		this.isPremium = isPremium;
-	}
+    public class MovieTicket
+    {
+        private int rowNr;
+        private int seatNr;
+        private bool isPremium;
+        private MovieScreening movieScreening;
 
+        public MovieTicket(MovieScreening movieScreening, int rowNr, int seatNr, bool isPremium)
+        {
+            this.movieScreening = movieScreening;
+            this.rowNr = rowNr;
+            this.seatNr = seatNr;
+            this.isPremium = isPremium;
+        }
 
-	}
+        public bool isPremiumTicket()
+        {
+            return isPremium;
+        }
+
+        public double getPrice()
+        {
+            return 0.0;
+        }
+
+        public string toString()
+        {
+            return "";
+        }
+    }
 }
