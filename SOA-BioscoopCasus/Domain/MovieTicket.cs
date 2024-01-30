@@ -22,12 +22,14 @@
 
         public double getPrice()
         {
-            return 0.0;
+            return movieScreening.getPricePerSeat();
         }
 
         public string toString()
         {
             return "";
         }
+
+
     }
 }

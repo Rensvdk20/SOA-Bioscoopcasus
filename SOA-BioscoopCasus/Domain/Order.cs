@@ -19,9 +19,9 @@ namespace SOA_BioscoopCasus.Domain
             this.isStudentOrder = isStudentOrder;
         }
 
-        public int getOrder()
+        public int getOrderNr()
         {
-            return orderNr;
+            return this.orderNr;
         }
 
         public void addSeatReservation(MovieTicket ticket)
@@ -32,9 +32,20 @@ namespace SOA_BioscoopCasus.Domain
         public double calculatePrice()
         {
             double totalPrice = 0;
-            foreach(MovieTicket ticket in this.tickets)
+            for (int i = 0; i < tickets.Count; i++)
             {
-                totalPrice += ticket.getPrice();
+                // Is the user a student?
+                if(isStudentOrder)
+                {
+                    // Every second ticket is free for students
+                    if (i % 2 == 0)
+                    {
+                        totalPrice += tickets[i].getPrice();
+                    }
+                } else
+                {
+                    
+                }
             }
 
             return totalPrice;
@@ -42,7 +53,7 @@ namespace SOA_BioscoopCasus.Domain
 
         public void export(TicketExportFormat exportFormat)
         {
-
+            
         }
     }
 }

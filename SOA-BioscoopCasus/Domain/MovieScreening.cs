@@ -18,7 +18,7 @@ namespace SOA_BioscoopCasus.Domain
 
         public double getPricePerSeat()
         {
-            return 0.0;
+            return pricePerSeat;
         }
 
         public string toString()
