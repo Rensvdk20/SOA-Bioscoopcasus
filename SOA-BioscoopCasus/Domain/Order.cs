@@ -32,19 +32,56 @@ namespace SOA_BioscoopCasus.Domain
         public double calculatePrice()
         {
             double totalPrice = 0;
+            bool isWeekend = DateTime.Now.DayOfWeek == DayOfWeek.Friday || DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday;
+
             for (int i = 0; i < tickets.Count; i++)
             {
+                MovieTicket currentTicket = tickets[i];
+
                 // Is the user a student?
-                if(isStudentOrder)
+                if (isStudentOrder)
                 {
-                    // Every second ticket is free for students
-                    if (i % 2 == 0)
+                    // Every 2nd ticket is free for students or for weekday screenings
+                    if (i % 2 == 0 || !isWeekend)
                     {
-                        totalPrice += tickets[i].getPrice();
+                        totalPrice += currentTicket.getPrice();
                     }
-                } else
+
+                    // Apply premium ticket cost for students
+                    if (currentTicket.isPremiumTicket())
+                    {
+                        totalPrice += 2.0;
+                    }
+                }
+                else // Non-student order
                 {
-                    
+                    // Weekend pricing
+                    if (isWeekend)
+                    {
+                        // Apply group discount for orders with 6 or more tickets
+                        if (tickets.Count >= 6)
+                        {
+                            totalPrice += currentTicket.getPrice() * 0.9;
+                        }
+                        else
+                        {
+                            totalPrice += currentTicket.getPrice();
+                        }
+                    }
+                    else // Weekday pricing
+                    {
+                        // Every 2nd ticket is free for weekday screenings
+                        if (i % 2 == 0)
+                        {
+                            totalPrice += currentTicket.getPrice();
+                        }
+                    }
+
+                    // Apply premium ticket cost for non-students
+                    if (currentTicket.isPremiumTicket())
+                    {
+                        totalPrice += 3.0;
+                    }
                 }
             }
 
