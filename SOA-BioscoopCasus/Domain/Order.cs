@@ -41,8 +41,8 @@ namespace SOA_BioscoopCasus.Domain
                 // Is the user a student?
                 if (isStudentOrder)
                 {
-                    // Every 2nd ticket is free for students or for weekday screenings
-                    if (i % 2 == 0 || !isWeekend)
+                    // Every 2nd ticket is free for students
+                    if (i % 2 == 0)
                     {
                         totalPrice += currentTicket.getPrice();
                     }
@@ -90,7 +90,23 @@ namespace SOA_BioscoopCasus.Domain
 
         public void export(TicketExportFormat exportFormat)
         {
-            
+            switch (exportFormat)
+            {
+                case TicketExportFormat.PLAINTEXT:
+                    // Plain text export
+                    Console.WriteLine("Exporting order to plaintext...");
+                    Console.WriteLine($"Order Number: {orderNr}");
+                    foreach (MovieTicket ticket in tickets)
+                    {
+                        Console.WriteLine($"Ticket: {ticket.ToString()}");
+                    }
+                    Console.WriteLine($"Total Price: {calculatePrice()}");
+                    break;
+
+                case TicketExportFormat.JSON:
+                    // JSON export
+                    break;
+            }
         }
     }
 }
