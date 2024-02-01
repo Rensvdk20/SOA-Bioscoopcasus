@@ -10,8 +10,10 @@ namespace SOA_BioscoopCasus.Domain
     {
         private DateTime dateAndTime;
         private double pricePerSeat;
+        private Movie movie;
 
         public MovieScreening(Movie movie, DateTime dateAndTime, double pricePerSeat) {
+            this.movie = movie;
             this.dateAndTime = dateAndTime;
             this.pricePerSeat = pricePerSeat;
         }
@@ -23,7 +25,7 @@ namespace SOA_BioscoopCasus.Domain
 
         public string toString()
         {
-            return "";
+            return this.movie.toString();
         }
     }
 }

@@ -27,7 +27,7 @@
 
         public string toString()
         {
-            return "";
+            return this.movieScreening.toString();
         }
 
 

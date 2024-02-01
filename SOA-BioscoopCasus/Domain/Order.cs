@@ -98,13 +98,32 @@ namespace SOA_BioscoopCasus.Domain
                     Console.WriteLine($"Order Number: {orderNr}");
                     foreach (MovieTicket ticket in tickets)
                     {
-                        Console.WriteLine($"Ticket: {ticket.ToString()}");
+                        Console.WriteLine($"Ticket: {ticket.toString()}");
                     }
-                    Console.WriteLine($"Total Price: {calculatePrice()}");
                     break;
 
                 case TicketExportFormat.JSON:
                     // JSON export
+                    Console.WriteLine("Exporting order to JSON...");
+                    Console.WriteLine(
+                        "{\n" +
+                         $"\u0020\u0020\"orderNr\": {orderNr}, \n" +
+                         $"\u0020\u0020\"tickets\": ["
+                    );
+
+                    MovieTicket lastTicket = tickets.Last();
+                    foreach (MovieTicket ticket in tickets)
+                    {
+                        Console.WriteLine(
+                        "\u0020\u0020\u0020\u0020{" +
+                            $"\"ticket\": \"{ticket.toString()}\"" +
+                        (ticket.Equals(lastTicket) ? "}" : "},")
+                        );
+                    }
+                    Console.WriteLine(
+                         "\u0020\u0020]\n" +
+                         "}"
+                    );
                     break;
             }
         }

@@ -16,6 +16,9 @@ class Program
         Console.WriteLine(order1.calculatePrice());
 
         order1.export(TicketExportFormat.PLAINTEXT);
+        order1.export(TicketExportFormat.JSON);
+
+        Console.WriteLine("______________________________________________________________");
 
         // Non-student order
         Order order2 = new Order(2, false);
@@ -28,6 +31,9 @@ class Program
         Console.WriteLine(order2.calculatePrice());
 
         order2.export(TicketExportFormat.PLAINTEXT);
+        order2.export(TicketExportFormat.JSON);
+
+        Console.WriteLine("______________________________________________________________");
 
         // Non-student group order (werkt alleen in het weekend)
         Order order3 = new Order(3, false);
@@ -41,5 +47,8 @@ class Program
         Console.WriteLine(order3.calculatePrice());
 
         order3.export(TicketExportFormat.PLAINTEXT);
+        order3.export(TicketExportFormat.JSON);
+
+        Console.WriteLine("______________________________________________________________");
     }
 }

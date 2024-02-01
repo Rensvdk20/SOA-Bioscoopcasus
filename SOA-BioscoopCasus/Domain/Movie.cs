@@ -15,6 +15,11 @@
             movieScreenings.Add(screening);
         }
 
+        public string getTitle()
+        {
+            return this.title;
+        }
+
         public string toString()
         {
             return this.title;
