@@ -71,7 +71,7 @@ namespace SOA_BioscoopCasus.Domain
                     else // Weekday pricing
                     {
                         // Every 2nd ticket is free for weekday screenings
-                        if (i % 2 == 0)
+                        if ((i + 1) % 2 == 0)
                         {
                             totalPrice += currentTicket.getPrice();
                         }
