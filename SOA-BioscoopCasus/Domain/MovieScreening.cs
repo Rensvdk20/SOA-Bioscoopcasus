@@ -18,6 +18,11 @@ namespace SOA_BioscoopCasus.Domain
             this.pricePerSeat = pricePerSeat;
         }
 
+        public DateTime getDateAndTime()
+        {
+            return dateAndTime;
+        }
+
         public decimal getPricePerSeat()
         {
             return pricePerSeat;

@@ -32,25 +32,26 @@ namespace SOA_BioscoopCasus.Domain
         public decimal calculatePrice()
         {
             decimal totalPrice = 0;
-            bool isWeekend = DateTime.Now.DayOfWeek == DayOfWeek.Friday || DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday;
 
             for (int i = 0; i < tickets.Count; i++)
             {
                 MovieTicket currentTicket = tickets[i];
+                DateTime ticketDateTime = currentTicket.getDate();
+                bool isWeekend = ticketDateTime.DayOfWeek == DayOfWeek.Friday || ticketDateTime.DayOfWeek == DayOfWeek.Saturday || ticketDateTime.DayOfWeek == DayOfWeek.Sunday;
 
                 // Is the user a student?
                 if (isStudentOrder)
                 {
                     // Every 2nd ticket is free for students
-                    if ((i + 1) % 2 == 0)
+                    if ((i + 1) % 2 != 0)
                     {
                         totalPrice += currentTicket.getPrice();
-                    }
 
-                    // Apply premium ticket cost for students
-                    if (currentTicket.isPremiumTicket())
-                    {
-                        totalPrice += 2;
+                        // Apply premium ticket cost for students
+                        if (currentTicket.isPremiumTicket())
+                        {
+                            totalPrice += 2;
+                        }
                     }
                 }
                 else // Non-student order
@@ -71,7 +72,7 @@ namespace SOA_BioscoopCasus.Domain
                     else // Weekday pricing
                     {
                         // Every 2nd ticket is free for weekday screenings
-                        if ((i + 1) % 2 == 0)
+                        if ((i + 1) % 2 != 0)
                         {
                             totalPrice += currentTicket.getPrice();
                         }

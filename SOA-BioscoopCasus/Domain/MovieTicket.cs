@@ -20,6 +20,11 @@
             return isPremium;
         }
 
+        public DateTime getDate()
+        {
+            return this.movieScreening.getDateAndTime();
+        }
+
         public decimal getPrice()
         {
             return movieScreening.getPricePerSeat();

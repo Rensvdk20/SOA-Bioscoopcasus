@@ -78,12 +78,12 @@ class Program
         Console.WriteLine(order4.calculatePrice());
 
         Order order5 = new Order(1, false); // 10 | Non-student buiten het weekend met een even aantal tickets
-        order5.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, false));
-        order5.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, false));
+        order5.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 1), 10), 1, 1, false));
+        order5.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 1), 10), 1, 1, false));
         Console.WriteLine(order5.calculatePrice());
 
         Order order6 = new Order(1, false); // 10 | Non-student buiten het weekend met een oneven aantal tickets
-        order6.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, false));
+        order6.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 1), 10), 1, 1, false));
         Console.WriteLine(order6.calculatePrice());
     }
 }
