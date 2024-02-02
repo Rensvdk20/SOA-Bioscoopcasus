@@ -59,14 +59,18 @@ namespace SOA_BioscoopCasus.Domain
                     // Weekend pricing
                     if (isWeekend)
                     {
-                        // Apply group discount for orders with 6 or more tickets
-                        if (tickets.Count >= 6)
+                        totalPrice += currentTicket.getPrice();
+
+                        // Apply premium ticket cost for non-students
+                        if (currentTicket.isPremiumTicket())
                         {
-                            totalPrice += currentTicket.getPrice() * 0.9M;
+                            totalPrice += 3;
                         }
-                        else
+
+                        // Apply group discount for orders with 6 or more tickets
+                        if ((i + 1) == tickets.Count && tickets.Count >= 6)
                         {
-                            totalPrice += currentTicket.getPrice();
+                            totalPrice *= 0.9M;
                         }
                     }
                     else // Weekday pricing
@@ -75,13 +79,13 @@ namespace SOA_BioscoopCasus.Domain
                         if ((i + 1) % 2 != 0)
                         {
                             totalPrice += currentTicket.getPrice();
-                        }
-                    }
 
-                    // Apply premium ticket cost for non-students
-                    if (currentTicket.isPremiumTicket())
-                    {
-                        totalPrice += 3;
+                            // Apply premium ticket cost for non-students
+                            if (currentTicket.isPremiumTicket())
+                            {
+                                totalPrice += 3;
+                            }
+                        }
                     }
                 }
             }
