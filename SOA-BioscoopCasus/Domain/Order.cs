@@ -42,7 +42,7 @@ namespace SOA_BioscoopCasus.Domain
                 if (isStudentOrder)
                 {
                     // Every 2nd ticket is free for students
-                    if (i % 2 == 0)
+                    if ((i + 1) % 2 == 0)
                     {
                         totalPrice += currentTicket.getPrice();
                     }
