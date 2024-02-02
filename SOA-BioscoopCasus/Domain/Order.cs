@@ -80,7 +80,7 @@ namespace SOA_BioscoopCasus.Domain
                     // Apply premium ticket cost for non-students
                     if (currentTicket.isPremiumTicket())
                     {
-                        totalPrice += 3.0M;
+                        totalPrice += 3;
                     }
                 }
             }
