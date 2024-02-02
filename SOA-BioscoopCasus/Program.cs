@@ -89,7 +89,8 @@ class Program
         order7.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 1), 10), 1, 1, false));
         Console.WriteLine(order7.calculatePrice());
 
-        Order order8 = new Order(1, false); // 13 | Non-student buiten het weekend met een even aantal premium tickets
+        Order order8 = new Order(1, false); // 26 | Non-student buiten het weekend met een even aantal premium tickets
+        order8.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 1), 10), 1, 1, true));
         order8.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 1), 10), 1, 1, true));
         order8.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 1), 10), 1, 1, true));
         Console.WriteLine(order8.calculatePrice());
