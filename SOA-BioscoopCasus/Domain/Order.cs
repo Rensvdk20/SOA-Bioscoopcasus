@@ -40,15 +40,15 @@ namespace SOA_BioscoopCasus.Domain
                 bool isWeekend = ticketDateTime.DayOfWeek == DayOfWeek.Friday || ticketDateTime.DayOfWeek == DayOfWeek.Saturday || ticketDateTime.DayOfWeek == DayOfWeek.Sunday;
 
                 // Is the user a student?
-                if (isStudentOrder)
+                if (isStudentOrder) // A
                 {
                     // Every 2nd ticket is free for students
-                    if ((i + 1) % 2 != 0)
+                    if ((i + 1) % 2 != 0) // B
                     {
                         totalPrice += currentTicket.getPrice();
 
                         // Apply premium ticket cost for students
-                        if (currentTicket.isPremiumTicket())
+                        if (currentTicket.isPremiumTicket()) // C
                         {
                             totalPrice += 2;
                         }
@@ -57,18 +57,18 @@ namespace SOA_BioscoopCasus.Domain
                 else // Non-student order
                 {
                     // Weekend pricing
-                    if (isWeekend)
+                    if (isWeekend) // D
                     {
                         totalPrice += currentTicket.getPrice();
 
                         // Apply premium ticket cost for non-students
-                        if (currentTicket.isPremiumTicket())
+                        if (currentTicket.isPremiumTicket()) // E
                         {
                             totalPrice += 3;
                         }
 
                         // Apply group discount for orders with 6 or more tickets
-                        if ((i + 1) == tickets.Count && tickets.Count >= 6)
+                        if ((i + 1) == tickets.Count && tickets.Count >= 6) // F
                         {
                             totalPrice *= 0.9M;
                         }
@@ -76,12 +76,12 @@ namespace SOA_BioscoopCasus.Domain
                     else // Weekday pricing
                     {
                         // Every 2nd ticket is free for weekday screenings
-                        if ((i + 1) % 2 != 0)
+                        if ((i + 1) % 2 != 0) // G
                         {
                             totalPrice += currentTicket.getPrice();
 
                             // Apply premium ticket cost for non-students
-                            if (currentTicket.isPremiumTicket())
+                            if (currentTicket.isPremiumTicket()) // H
                             {
                                 totalPrice += 3;
                             }
