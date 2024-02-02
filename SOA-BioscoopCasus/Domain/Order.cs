@@ -29,9 +29,9 @@ namespace SOA_BioscoopCasus.Domain
             this.tickets.Add(ticket);
         }
 
-        public double calculatePrice()
+        public decimal calculatePrice()
         {
-            double totalPrice = 0;
+            decimal totalPrice = 0;
             bool isWeekend = DateTime.Now.DayOfWeek == DayOfWeek.Friday || DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday;
 
             for (int i = 0; i < tickets.Count; i++)
@@ -50,7 +50,7 @@ namespace SOA_BioscoopCasus.Domain
                     // Apply premium ticket cost for students
                     if (currentTicket.isPremiumTicket())
                     {
-                        totalPrice += 2.0;
+                        totalPrice += 2;
                     }
                 }
                 else // Non-student order
@@ -61,7 +61,7 @@ namespace SOA_BioscoopCasus.Domain
                         // Apply group discount for orders with 6 or more tickets
                         if (tickets.Count >= 6)
                         {
-                            totalPrice += currentTicket.getPrice() * 0.9;
+                            totalPrice += currentTicket.getPrice() * 0.9M;
                         }
                         else
                         {
@@ -80,7 +80,7 @@ namespace SOA_BioscoopCasus.Domain
                     // Apply premium ticket cost for non-students
                     if (currentTicket.isPremiumTicket())
                     {
-                        totalPrice += 3.0;
+                        totalPrice += 3.0M;
                     }
                 }
             }

@@ -20,7 +20,7 @@
             return isPremium;
         }
 
-        public double getPrice()
+        public decimal getPrice()
         {
             return movieScreening.getPricePerSeat();
         }

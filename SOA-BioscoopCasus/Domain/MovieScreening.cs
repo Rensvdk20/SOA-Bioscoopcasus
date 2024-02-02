@@ -9,16 +9,16 @@ namespace SOA_BioscoopCasus.Domain
     public class MovieScreening
     {
         private DateTime dateAndTime;
-        private double pricePerSeat;
+        private decimal pricePerSeat;
         private Movie movie;
 
-        public MovieScreening(Movie movie, DateTime dateAndTime, double pricePerSeat) {
+        public MovieScreening(Movie movie, DateTime dateAndTime, decimal pricePerSeat) {
             this.movie = movie;
             this.dateAndTime = dateAndTime;
             this.pricePerSeat = pricePerSeat;
         }
 
-        public double getPricePerSeat()
+        public decimal getPricePerSeat()
         {
             return pricePerSeat;
         }
