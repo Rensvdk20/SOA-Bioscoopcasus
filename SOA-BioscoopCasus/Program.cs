@@ -69,16 +69,16 @@ class Program
         Console.WriteLine(order3.calculatePrice());
 
         Order order4 = new Order(1, false); // 70,2 | Non-student in het weekend met >= 6 premium tickets
-        order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, true));
-        order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, true));
-        order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, true));
-        order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, true));
-        order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, true));
-        order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, true));
+        order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 2), 10), 1, 1, true));
+        order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 2), 10), 1, 1, true));
+        order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 2), 10), 1, 1, true));
+        order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 2), 10), 1, 1, true));
+        order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 2), 10), 1, 1, true));
+        order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 2), 10), 1, 1, true));
         Console.WriteLine(order4.calculatePrice());
 
         Order order5 = new Order(1, false); // 10 | Non-student in het weekend met < 6 normale tickets
-        order5.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, false));
+        order5.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 2), 10), 1, 1, false));
         Console.WriteLine(order5.calculatePrice());
 
         Order order6 = new Order(1, false); // 13 | Non-student buiten het weekend met een oneven aantal premium tickets
