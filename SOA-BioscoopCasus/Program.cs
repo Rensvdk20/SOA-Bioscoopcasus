@@ -5,7 +5,7 @@ using SOA_BioscoopCasus.Domain;
 
 class Program
 {
-    static void Main()
+    static void main()
     {
         //// Student order
         //Order order1 = new Order(1, true);
