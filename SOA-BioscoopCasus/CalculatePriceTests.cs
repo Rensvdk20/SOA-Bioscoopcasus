@@ -1,5 +1,5 @@
-using Xunit;
 using SOA_BioscoopCasus.Domain;
+using Xunit;
 
 public class CalculatePriceTests
 {
