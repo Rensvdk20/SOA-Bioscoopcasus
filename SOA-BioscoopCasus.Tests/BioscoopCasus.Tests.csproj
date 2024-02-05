@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\SIOA-BioscoopCasus\BioscoopCasus.csproj" />
+    <ProjectReference Include="..\SOA-BioscoopCasus\BioscoopCasus.csproj" />
   </ItemGroup>
 
 </Project>
