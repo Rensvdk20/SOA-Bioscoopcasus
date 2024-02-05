@@ -3,7 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33213.308
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SOA-BioscoopCasus", "SOA-BioscoopCasus\SOA-BioscoopCasus.csproj", "{6F29086C-88D9-4689-87FB-4382700A853B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BioscoopCasus.Tests", "SOA-BioscoopCasus\BioscoopCasus.Tests.csproj", "{6F29086C-88D9-4689-87FB-4382700A853B}"
+	ProjectSection(ProjectDependencies) = postProject
+		{436E133E-FC47-4444-93FF-2F0994CE9878} = {436E133E-FC47-4444-93FF-2F0994CE9878}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BioscoopCasus", "SIOA-BioscoopCasus\BioscoopCasus.csproj", "{436E133E-FC47-4444-93FF-2F0994CE9878}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +20,10 @@ Global
 		{6F29086C-88D9-4689-87FB-4382700A853B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F29086C-88D9-4689-87FB-4382700A853B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F29086C-88D9-4689-87FB-4382700A853B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{436E133E-FC47-4444-93FF-2F0994CE9878}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{436E133E-FC47-4444-93FF-2F0994CE9878}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{436E133E-FC47-4444-93FF-2F0994CE9878}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{436E133E-FC47-4444-93FF-2F0994CE9878}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
