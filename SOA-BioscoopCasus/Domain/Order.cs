@@ -1,22 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+﻿using SOA_BioscoopCasus.Interfaces;
 
 namespace SOA_BioscoopCasus.Domain
 {
     public class Order
     {
-        private int orderNr;
-        private bool isStudentOrder;
-        private List<MovieTicket> tickets = new List<MovieTicket>();
+        private readonly int orderNr;
+        private readonly bool isStudentOrder;
+        private readonly List<MovieTicket> tickets = new List<MovieTicket>();
+        private IExportStrategy exportStrategy;
 
-        public Order(int orderNr, bool isStudentOrder)
+        public Order(int orderNr, bool isStudentOrder, IExportStrategy exportStrategy)
         {
             this.orderNr = orderNr;
             this.isStudentOrder = isStudentOrder;
+            this.exportStrategy = exportStrategy;
+        }
+
+        public void addSeatReservation(MovieTicket ticket)
+        {
+            this.tickets.Add(ticket);
         }
 
         public int getOrderNr()
@@ -24,9 +26,9 @@ namespace SOA_BioscoopCasus.Domain
             return this.orderNr;
         }
 
-        public void addSeatReservation(MovieTicket ticket)
+        public List<MovieTicket> getTickets()
         {
-            this.tickets.Add(ticket);
+            return this.tickets;
         }
 
         public decimal calculatePrice()
@@ -93,44 +95,9 @@ namespace SOA_BioscoopCasus.Domain
             return totalPrice;
         }
 
-        public void export(TicketExportFormat exportFormat)
+        public void export()
         {
-            switch (exportFormat)
-            {
-                case TicketExportFormat.PLAINTEXT:
-                    // Plain text export
-                    Console.WriteLine("Exporting order to plaintext...");
-                    Console.WriteLine($"Order Number: {orderNr}");
-                    foreach (MovieTicket ticket in tickets)
-                    {
-                        Console.WriteLine($"Ticket: {ticket.toString()}");
-                    }
-                    break;
-
-                case TicketExportFormat.JSON:
-                    // JSON export
-                    Console.WriteLine("Exporting order to JSON...");
-                    Console.WriteLine(
-                        "{\n" +
-                         $"\u0020\u0020\"orderNr\": {orderNr}, \n" +
-                         $"\u0020\u0020\"tickets\": ["
-                    );
-
-                    MovieTicket lastTicket = tickets.Last();
-                    foreach (MovieTicket ticket in tickets)
-                    {
-                        Console.WriteLine(
-                        "\u0020\u0020\u0020\u0020{" +
-                            $"\"ticket\": \"{ticket.toString()}\"" +
-                        (ticket.Equals(lastTicket) ? "}" : "},")
-                        );
-                    }
-                    Console.WriteLine(
-                         "\u0020\u0020]\n" +
-                         "}"
-                    );
-                    break;
-            }
+            exportStrategy.export(this);
         }
     }
 }
