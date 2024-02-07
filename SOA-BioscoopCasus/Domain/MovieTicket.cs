@@ -2,16 +2,16 @@
 {
     public class MovieTicket
     {
-        private int rowNr;
-        private int seatNr;
-        private bool isPremium;
-        private MovieScreening movieScreening;
+        private int _rowNr;
+        private int _seatNr;
+        private readonly bool isPremium;
+        private readonly MovieScreening _movieScreening;
 
         public MovieTicket(MovieScreening movieScreening, int rowNr, int seatNr, bool isPremium)
         {
-            this.movieScreening = movieScreening;
-            this.rowNr = rowNr;
-            this.seatNr = seatNr;
+            this._movieScreening = movieScreening;
+            this._rowNr = rowNr;
+            this._seatNr = seatNr;
             this.isPremium = isPremium;
         }
 
@@ -22,17 +22,17 @@
 
         public DateTime getDate()
         {
-            return this.movieScreening.getDateAndTime();
+            return this._movieScreening.getDateAndTime();
         }
 
         public decimal getPrice()
         {
-            return movieScreening.getPricePerSeat();
+            return _movieScreening.getPricePerSeat();
         }
 
         public string toString()
         {
-            return this.movieScreening.toString();
+            return this._movieScreening.toString();
         }
 
 

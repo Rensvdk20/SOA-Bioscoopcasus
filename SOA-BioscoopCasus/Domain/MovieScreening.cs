@@ -1,36 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SOA_BioscoopCasus.Domain
+﻿namespace SOA_BioscoopCasus.Domain
 {
     public class MovieScreening
     {
-        private DateTime dateAndTime;
-        private decimal pricePerSeat;
-        private Movie movie;
+        private readonly DateTime _dateAndTime;
+        private readonly decimal _pricePerSeat;
+        private readonly Movie _movie;
 
         public MovieScreening(Movie movie, DateTime dateAndTime, decimal pricePerSeat) {
-            this.movie = movie;
-            this.dateAndTime = dateAndTime;
-            this.pricePerSeat = pricePerSeat;
+            this._movie = movie;
+            this._dateAndTime = dateAndTime;
+            this._pricePerSeat = pricePerSeat;
         }
 
         public DateTime getDateAndTime()
         {
-            return dateAndTime;
+            return _dateAndTime;
         }
 
         public decimal getPricePerSeat()
         {
-            return pricePerSeat;
+            return _pricePerSeat;
         }
 
         public string toString()
         {
-            return this.movie.toString();
+            return _movie.toString();
         }
     }
 }

@@ -1,46 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
+﻿
+using SOA_BioscoopCasus.Interfaces;
 
 namespace SOA_BioscoopCasus.Domain
 {
     public class Order
     {
-        private int orderNr;
-        private bool isStudentOrder;
-        private List<MovieTicket> tickets = new List<MovieTicket>();
+        private readonly int _orderNr;
+        private readonly bool _isStudentOrder;
+        private readonly List<MovieTicket> _tickets = new List<MovieTicket>();
+        private readonly IExportStrategy _exportStrategy;
 
-        public Order(int orderNr, bool isStudentOrder)
+        public Order(int orderNr, bool isStudentOrder, IExportStrategy exportStrategy)
         {
-            this.orderNr = orderNr;
-            this.isStudentOrder = isStudentOrder;
-        }
-
-        public int getOrderNr()
-        {
-            return this.orderNr;
+            this._orderNr = orderNr;
+            this._isStudentOrder = isStudentOrder;
+            this._exportStrategy = exportStrategy;
         }
 
         public void addSeatReservation(MovieTicket ticket)
         {
-            this.tickets.Add(ticket);
+            this._tickets.Add(ticket);
+        }
+
+        public int getOrderNr()
+        {
+            return this._orderNr;
+        }
+
+        public List<MovieTicket> getTickets()
+        {
+            return this._tickets;
         }
 
         public decimal calculatePrice()
         {
             decimal totalPrice = 0;
 
-            for (int i = 0; i < tickets.Count; i++)
+            for (int i = 0; i < _tickets.Count; i++)
             {
-                MovieTicket currentTicket = tickets[i];
+                MovieTicket currentTicket = _tickets[i];
                 DateTime ticketDateTime = currentTicket.getDate();
                 bool isWeekend = ticketDateTime.DayOfWeek == DayOfWeek.Friday || ticketDateTime.DayOfWeek == DayOfWeek.Saturday || ticketDateTime.DayOfWeek == DayOfWeek.Sunday;
 
                 // Is the user a student?
-                if (isStudentOrder) // A
+                if (_isStudentOrder) // A
                 {
                     // Every 2nd ticket is free for students
                     if ((i + 1) % 2 != 0) // B
@@ -68,7 +71,7 @@ namespace SOA_BioscoopCasus.Domain
                         }
 
                         // Apply group discount for orders with 6 or more tickets
-                        if ((i + 1) == tickets.Count && tickets.Count >= 6) // F
+                        if ((i + 1) == _tickets.Count && _tickets.Count >= 6) // F
                         {
                             totalPrice *= 0.9M;
                         }
@@ -93,44 +96,9 @@ namespace SOA_BioscoopCasus.Domain
             return totalPrice;
         }
 
-        public void export(TicketExportFormat exportFormat)
+        public void export()
         {
-            switch (exportFormat)
-            {
-                case TicketExportFormat.PLAINTEXT:
-                    // Plain text export
-                    Console.WriteLine("Exporting order to plaintext...");
-                    Console.WriteLine($"Order Number: {orderNr}");
-                    foreach (MovieTicket ticket in tickets)
-                    {
-                        Console.WriteLine($"Ticket: {ticket.toString()}");
-                    }
-                    break;
-
-                case TicketExportFormat.JSON:
-                    // JSON export
-                    Console.WriteLine("Exporting order to JSON...");
-                    Console.WriteLine(
-                        "{\n" +
-                         $"\u0020\u0020\"orderNr\": {orderNr}, \n" +
-                         $"\u0020\u0020\"tickets\": ["
-                    );
-
-                    MovieTicket lastTicket = tickets.Last();
-                    foreach (MovieTicket ticket in tickets)
-                    {
-                        Console.WriteLine(
-                        "\u0020\u0020\u0020\u0020{" +
-                            $"\"ticket\": \"{ticket.toString()}\"" +
-                        (ticket.Equals(lastTicket) ? "}" : "},")
-                        );
-                    }
-                    Console.WriteLine(
-                         "\u0020\u0020]\n" +
-                         "}"
-                    );
-                    break;
-            }
+            _exportStrategy.export(this);
         }
     }
 }
