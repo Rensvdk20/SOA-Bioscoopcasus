@@ -10,7 +10,7 @@ public class CalculatePriceTests
         // Arrange
         Order order1 = new Order(1, true, new JsonExport());
         order1.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, true));
-        decimal expectedResult = 12;
+        const decimal expectedResult = 12;
 
         // Act
         decimal actualResult = order1.calculatePrice();
@@ -25,7 +25,7 @@ public class CalculatePriceTests
         // Arrange
         Order order2 = new Order(1, true, new JsonExport());
         order2.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, false));
-        decimal expectedResult = 10;
+        const decimal expectedResult = 10;
 
         // Act
         decimal actualResult = order2.calculatePrice();
@@ -41,7 +41,7 @@ public class CalculatePriceTests
         Order order3 = new Order(1, true, new JsonExport());
         order3.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, true));
         order3.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, true));
-        decimal expectedResult = 12;
+        const decimal expectedResult = 12;
 
         // Act
         decimal actualResult = order3.calculatePrice();
@@ -61,7 +61,7 @@ public class CalculatePriceTests
         order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 2), 10), 1, 1, true));
         order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 2), 10), 1, 1, true));
         order4.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 2), 10), 1, 1, true));
-        decimal expectedResult = 70.2M;
+        const decimal expectedResult = 70.2M;
 
         // Act
         decimal actualResult = order4.calculatePrice();
@@ -76,7 +76,7 @@ public class CalculatePriceTests
         // Arrange
         Order order5 = new Order(1, false, new JsonExport());
         order5.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 2), 10), 1, 1, false));
-        decimal expectedResult = 10;
+        const decimal expectedResult = 10;
 
         // Act
         decimal actualResult = order5.calculatePrice();
@@ -91,7 +91,7 @@ public class CalculatePriceTests
         // Arrange
         Order order6 = new Order(1, false, new JsonExport());
         order6.addSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), new DateTime(2024, 2, 1), 10), 1, 1, true));
-        decimal expectedResult = 13;
+        const decimal expectedResult = 13;
 
         // Act
         decimal actualResult = order6.calculatePrice();

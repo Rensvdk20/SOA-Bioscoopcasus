@@ -1,48 +1,49 @@
-﻿using SOA_BioscoopCasus.Interfaces;
+﻿
+using SOA_BioscoopCasus.Interfaces;
 
 namespace SOA_BioscoopCasus.Domain
 {
     public class Order
     {
-        private readonly int orderNr;
-        private readonly bool isStudentOrder;
-        private readonly List<MovieTicket> tickets = new List<MovieTicket>();
-        private IExportStrategy exportStrategy;
+        private readonly int _orderNr;
+        private readonly bool _isStudentOrder;
+        private readonly List<MovieTicket> _tickets = new List<MovieTicket>();
+        private readonly IExportStrategy _exportStrategy;
 
         public Order(int orderNr, bool isStudentOrder, IExportStrategy exportStrategy)
         {
-            this.orderNr = orderNr;
-            this.isStudentOrder = isStudentOrder;
-            this.exportStrategy = exportStrategy;
+            this._orderNr = orderNr;
+            this._isStudentOrder = isStudentOrder;
+            this._exportStrategy = exportStrategy;
         }
 
         public void addSeatReservation(MovieTicket ticket)
         {
-            this.tickets.Add(ticket);
+            this._tickets.Add(ticket);
         }
 
         public int getOrderNr()
         {
-            return this.orderNr;
+            return this._orderNr;
         }
 
         public List<MovieTicket> getTickets()
         {
-            return this.tickets;
+            return this._tickets;
         }
 
         public decimal calculatePrice()
         {
             decimal totalPrice = 0;
 
-            for (int i = 0; i < tickets.Count; i++)
+            for (int i = 0; i < _tickets.Count; i++)
             {
-                MovieTicket currentTicket = tickets[i];
+                MovieTicket currentTicket = _tickets[i];
                 DateTime ticketDateTime = currentTicket.getDate();
                 bool isWeekend = ticketDateTime.DayOfWeek == DayOfWeek.Friday || ticketDateTime.DayOfWeek == DayOfWeek.Saturday || ticketDateTime.DayOfWeek == DayOfWeek.Sunday;
 
                 // Is the user a student?
-                if (isStudentOrder) // A
+                if (_isStudentOrder) // A
                 {
                     // Every 2nd ticket is free for students
                     if ((i + 1) % 2 != 0) // B
@@ -70,7 +71,7 @@ namespace SOA_BioscoopCasus.Domain
                         }
 
                         // Apply group discount for orders with 6 or more tickets
-                        if ((i + 1) == tickets.Count && tickets.Count >= 6) // F
+                        if ((i + 1) == _tickets.Count && _tickets.Count >= 6) // F
                         {
                             totalPrice *= 0.9M;
                         }
@@ -97,7 +98,7 @@ namespace SOA_BioscoopCasus.Domain
 
         public void export()
         {
-            exportStrategy.export(this);
+            _exportStrategy.export(this);
         }
     }
 }
