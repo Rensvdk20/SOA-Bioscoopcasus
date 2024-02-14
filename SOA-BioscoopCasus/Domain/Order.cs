@@ -8,12 +8,14 @@ namespace SOA_BioscoopCasus.Domain
         private readonly int _orderNr;
         private readonly bool _isStudentOrder;
         private readonly List<MovieTicket> _tickets = new List<MovieTicket>();
+        private readonly IEnumerable<ITicketPriceRule> _ticketPriceRules = new List<ITicketPriceRule>();
         private readonly IExportStrategy _exportStrategy;
 
-        public Order(int orderNr, bool isStudentOrder, IExportStrategy exportStrategy)
+        public Order(int orderNr, bool isStudentOrder, IEnumerable<ITicketPriceRule> ticketPriceRule, IExportStrategy exportStrategy)
         {
             this._orderNr = orderNr;
             this._isStudentOrder = isStudentOrder;
+            this._ticketPriceRules = ticketPriceRule;
             this._exportStrategy = exportStrategy;
         }
 
@@ -32,73 +34,35 @@ namespace SOA_BioscoopCasus.Domain
             return this._tickets;
         }
 
+        public bool isStudentOrder()
+        {
+            return this._isStudentOrder;
+        }
+
         public decimal calculatePrice()
         {
-            decimal totalPrice = 0;
+            decimal total = decimal.Zero;
 
             for (int i = 0; i < _tickets.Count; i++)
             {
-                MovieTicket currentTicket = _tickets[i];
-                DateTime ticketDateTime = currentTicket.getDate();
-                bool isWeekend = ticketDateTime.DayOfWeek == DayOfWeek.Friday || ticketDateTime.DayOfWeek == DayOfWeek.Saturday || ticketDateTime.DayOfWeek == DayOfWeek.Sunday;
+                MovieTicket ticket = _tickets[i];
+                decimal ticketPrice = ticket.getPrice();
 
-                // Is the user a student?
-                if (_isStudentOrder) // A
+                foreach (var pricingRule in this._ticketPriceRules)
                 {
-                    // Every 2nd ticket is free for students
-                    if ((i + 1) % 2 != 0) // B
-                    {
-                        totalPrice += currentTicket.getPrice();
-
-                        // Apply premium ticket cost for students
-                        if (currentTicket.isPremiumTicket()) // C
-                        {
-                            totalPrice += 2;
-                        }
-                    }
+                    if (ticketPrice > Decimal.Zero)
+                        ticketPrice = pricingRule.CalculateNewPrice(ticketPrice, i + 1, ticket, this);
                 }
-                else // Non-student order
-                {
-                    // Weekend pricing
-                    if (isWeekend) // D
-                    {
-                        totalPrice += currentTicket.getPrice();
 
-                        // Apply premium ticket cost for non-students
-                        if (currentTicket.isPremiumTicket()) // E
-                        {
-                            totalPrice += 3;
-                        }
-
-                        // Apply group discount for orders with 6 or more tickets
-                        if ((i + 1) == _tickets.Count && _tickets.Count >= 6) // F
-                        {
-                            totalPrice *= 0.9M;
-                        }
-                    }
-                    else // Weekday pricing
-                    {
-                        // Every 2nd ticket is free for weekday screenings
-                        if ((i + 1) % 2 != 0) // G
-                        {
-                            totalPrice += currentTicket.getPrice();
-
-                            // Apply premium ticket cost for non-students
-                            if (currentTicket.isPremiumTicket()) // H
-                            {
-                                totalPrice += 3;
-                            }
-                        }
-                    }
-                }
+                total += ticketPrice;
             }
 
-            return totalPrice;
+            return total;
         }
 
         public void export()
         {
-            _exportStrategy.export(this);
+            this._exportStrategy.export(this);
         }
     }
 }
