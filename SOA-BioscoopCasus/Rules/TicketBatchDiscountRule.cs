@@ -12,7 +12,7 @@ namespace SOA_BioscoopCasus.Rules
 
         public decimal CalculateNewPrice(decimal currentPrice, int ticketOrder, MovieTicket ticket, Order order)
         {
-            return ticket.IsWeekend() && !order.isStudentOrder() && order.getTickets().Count() >= DISCOUNT_TICKET_AMOUNT ? currentPrice * DISCOUNT : currentPrice;
+            return ticket.IsWeekend() && !order.IsStudentOrder() && order.GetTickets().Count() >= DISCOUNT_TICKET_AMOUNT ? currentPrice * DISCOUNT : currentPrice;
         }
     }
 }

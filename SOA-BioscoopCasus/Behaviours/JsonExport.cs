@@ -9,12 +9,12 @@ namespace SOA_BioscoopCasus.Behaviours
         {
             Console.WriteLine(
                 "{\n" +
-                $"\u0020\u0020\"orderNr\": {order.getOrderNr()}, \n" +
+                $"\u0020\u0020\"orderNr\": {order.GetOrderNr()}, \n" +
                 $"\u0020\u0020\"tickets\": ["
             );
 
-            MovieTicket lastTicket = order.getTickets().Last();
-            foreach (MovieTicket ticket in order.getTickets())
+            MovieTicket lastTicket = order.GetTickets().Last();
+            foreach (MovieTicket ticket in order.GetTickets())
             {
                 Console.WriteLine(
                     "\u0020\u0020\u0020\u0020{" +

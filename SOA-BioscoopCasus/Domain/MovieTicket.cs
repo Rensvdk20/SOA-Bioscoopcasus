@@ -22,23 +22,23 @@
 
         public bool IsWeekend()
         {
-            DateTime orderTicketDateTime = getDate();
+            DateTime orderTicketDateTime = GetDate();
             return orderTicketDateTime.DayOfWeek == DayOfWeek.Friday || orderTicketDateTime.DayOfWeek == DayOfWeek.Saturday || orderTicketDateTime.DayOfWeek == DayOfWeek.Sunday;
         }
 
-        public DateTime getDate()
+        public DateTime GetDate()
         {
-            return this._movieScreening.getDateAndTime();
+            return this._movieScreening.GetDateAndTime();
         }
 
-        public decimal getPrice()
+        public decimal GetPrice()
         {
-            return _movieScreening.getPricePerSeat();
+            return _movieScreening.GetPricePerSeat();
         }
 
         public string toString()
         {
-            return this._movieScreening.toString();
+            return this._movieScreening.ToString();
         }
 
 

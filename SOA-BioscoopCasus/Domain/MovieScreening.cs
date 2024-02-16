@@ -12,19 +12,19 @@
             this._pricePerSeat = pricePerSeat;
         }
 
-        public DateTime getDateAndTime()
+        public DateTime GetDateAndTime()
         {
             return _dateAndTime;
         }
 
-        public decimal getPricePerSeat()
+        public decimal GetPricePerSeat()
         {
             return _pricePerSeat;
         }
 
-        public string toString()
+        public string ToString()
         {
-            return _movie.toString();
+            return _movie.ToString();
         }
     }
 }

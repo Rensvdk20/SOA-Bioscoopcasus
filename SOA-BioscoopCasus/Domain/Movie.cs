@@ -10,7 +10,7 @@
             this._title = title;
         }
 
-        public string toString()
+        public string ToString()
         {
             return this._title;
         }

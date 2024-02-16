@@ -7,7 +7,7 @@ namespace SOA_BioscoopCasus.Rules
     {
         public decimal CalculateNewPrice(decimal currentPrice, int ticketOrder, MovieTicket ticket, Order order)
         {
-            return (order.isStudentOrder() || !ticket.IsWeekend()) && ticketOrder % 2 == 0 ? decimal.Zero : currentPrice;
+            return (order.IsStudentOrder() || !ticket.IsWeekend()) && ticketOrder % 2 == 0 ? decimal.Zero : currentPrice;
         }
     }
 }

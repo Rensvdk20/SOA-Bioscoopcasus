@@ -13,7 +13,7 @@ namespace SOA_BioscoopCasus.Rules
             if (!ticket.isPremiumTicket()) 
                 return currentPrice;
 
-            return currentPrice + (order.isStudentOrder() ? SURCHARGE_STUDENTS : SURCHARGE_NON_STUDENTS);
+            return currentPrice + (order.IsStudentOrder() ? SURCHARGE_STUDENTS : SURCHARGE_NON_STUDENTS);
         }
     }
 }
