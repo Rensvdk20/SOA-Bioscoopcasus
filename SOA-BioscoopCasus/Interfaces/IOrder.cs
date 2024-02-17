@@ -32,7 +32,7 @@ namespace SOA_BioscoopCasus.Interfaces
 
         IOrderState GetCancelledState();
 
-        IOrderState GetCreateddState();
+        IOrderState GetCreatedState();
 
         IOrderState GetPaidState();
 

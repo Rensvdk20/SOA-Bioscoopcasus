@@ -93,7 +93,7 @@ namespace SOA_BioscoopCasus.Domain
             return new CancelledState(this);
         }
 
-        public IOrderState GetCreateddState()
+        public IOrderState GetCreatedState()
         {
             return new CreatedState(this);
         }
