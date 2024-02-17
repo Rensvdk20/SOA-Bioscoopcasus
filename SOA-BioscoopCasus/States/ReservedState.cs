@@ -19,22 +19,24 @@ namespace SOA_BioscoopCasus.States
 
         public void AddSeatReservation(MovieTicket ticket)
         {
-            throw new InvalidOperationException("Order kan niet worden aangepast als deze al is gereserveerd.");
+            Console.WriteLine("Order kan niet worden aangepast als deze al is gereserveerd.");
         }
 
         public void SubmitOrder()
         {
-            throw new InvalidOperationException("Order is al gereserveerd.");
+            Console.WriteLine("Order is al gereserveerd.");
         }
 
         public void PayOrder()
         {
             this._order.PayOrder();
+            this._order.SetState(this._order.GetPaidState());
         }
 
         public void CancelOrder()
         {
             this._order.CancelOrder();
+            this._order.SetState(this._order.GetCancelledState());
         }
     }
 }

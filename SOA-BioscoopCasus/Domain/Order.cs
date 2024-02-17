@@ -11,7 +11,7 @@ namespace SOA_BioscoopCasus.Domain
         private readonly List<MovieTicket> _tickets = new List<MovieTicket>();
         private readonly IEnumerable<ITicketPriceRule> _ticketPriceRules = new List<ITicketPriceRule>();
         private readonly IExportStrategy _exportStrategy;
-        private IOrderState _currentState; // Huidige staat van de order
+        private IOrderState _currentState; // Current state of the order
 
         public Order(int orderNr, bool isStudentOrder, IEnumerable<ITicketPriceRule> ticketPriceRule, IExportStrategy exportStrategy)
         {
@@ -19,14 +19,12 @@ namespace SOA_BioscoopCasus.Domain
             this._isStudentOrder = isStudentOrder;
             this._ticketPriceRules = ticketPriceRule;
             this._exportStrategy = exportStrategy;
-            this.SetState(new CreatedState(this)); // Begint in de "Created" staat
+            this._currentState = new CreatedState(this); // Start in the "Created" state
         }
 
         public void SetState(IOrderState newState)
         {
-            // Hier moet nog een SetState methode worden geïmplementeerd.
-            // Gezien we een lineare volgorde hebben (aanmaken, annuleren/reserveren, betalen) hebben we geen previousState nodig.
-            // Ik weet dus niet hoe we dit moeten implementeren.
+            this._currentState = newState;
         }
 
         public void AddSeatReservation(MovieTicket ticket)
@@ -88,6 +86,26 @@ namespace SOA_BioscoopCasus.Domain
         public void Export()
         {
             this._exportStrategy.export(this);
+        }
+
+        public IOrderState GetCancelledState()
+        {
+            return new CancelledState(this);
+        }
+
+        public IOrderState GetCreateddState()
+        {
+            return new CreatedState(this);
+        }
+
+        public IOrderState GetPaidState()
+        {
+            return new PaidState(this);
+        }
+
+        public IOrderState GetReservedState()
+        {
+            return new ReservedState(this);
         }
     }
 }

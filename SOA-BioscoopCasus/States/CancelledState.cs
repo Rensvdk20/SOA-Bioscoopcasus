@@ -19,22 +19,22 @@ namespace SOA_BioscoopCasus.States
 
         public void AddSeatReservation(MovieTicket ticket)
         {
-            throw new InvalidOperationException("Geannuleerde order kan niet worden aangepast.");
+            Console.WriteLine("Geannuleerde order kan niet worden aangepast.");
         }
 
         public void SubmitOrder()
         {
-            throw new InvalidOperationException("Geannuleerde order kan niet worden ingediend.");
+            Console.WriteLine("Geannuleerde order kan niet worden ingediend.");
         }
 
         public void PayOrder()
         {
-            throw new InvalidOperationException("Geannuleerde order kan niet worden betaald.");
+            Console.WriteLine("Geannuleerde order kan niet worden betaald.");
         }
 
         public void CancelOrder()
         {
-            throw new InvalidOperationException("Order is al geannuleerd.");
+            Console.WriteLine("Order is al geannuleerd.");
         }
     }
 }

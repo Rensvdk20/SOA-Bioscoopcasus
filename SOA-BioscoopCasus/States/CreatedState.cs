@@ -25,16 +25,18 @@ namespace SOA_BioscoopCasus.States
         public void SubmitOrder()
         {
             this._order.SubmitOrder();
+            this._order.SetState(this._order.GetReservedState());
         }
 
         public void PayOrder()
         {
-            throw new InvalidOperationException("Order moet eerst worden ingediend voordat er betaald kan worden.");
+            Console.WriteLine("Order moet eerst worden ingediend voordat er betaald kan worden.");
         }
 
         public void CancelOrder()
         {
             this._order.CancelOrder();
+            this._order.SetState(this._order.GetCancelledState());
         }
     }
 }

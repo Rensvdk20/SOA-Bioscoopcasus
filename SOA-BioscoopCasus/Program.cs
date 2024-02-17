@@ -21,6 +21,7 @@ namespace SOA_BioscoopCasus
             order1.AddSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix 2"), DateTime.Now, 12), 1, 1, true));
             order1.Export();
 
+            order1.PayOrder();
         }
     }
 }

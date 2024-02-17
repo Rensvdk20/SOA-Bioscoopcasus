@@ -29,5 +29,13 @@ namespace SOA_BioscoopCasus.Interfaces
         void CancelOrder();
 
         void Export();
+
+        IOrderState GetCancelledState();
+
+        IOrderState GetCreateddState();
+
+        IOrderState GetPaidState();
+
+        IOrderState GetReservedState();
     }
 }
