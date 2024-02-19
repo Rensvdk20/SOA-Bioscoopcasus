@@ -88,6 +88,11 @@ namespace SOA_BioscoopCasus.Domain
             this._exportStrategy.export(this);
         }
 
+        public IOrderState GetCurrentState()
+        {
+            return this._currentState;
+        }
+
         public IOrderState GetCancelledState()
         {
             return new CancelledState(this);

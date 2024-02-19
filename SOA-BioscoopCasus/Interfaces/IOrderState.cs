@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SOA_BioscoopCasus.States
+namespace SOA_BioscoopCasus.Interfaces
 {
     public interface IOrderState
     {

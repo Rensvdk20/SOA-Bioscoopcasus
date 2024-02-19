@@ -29,13 +29,11 @@ namespace SOA_BioscoopCasus.States
 
         public void PayOrder()
         {
-            this._order.PayOrder();
             this._order.SetState(this._order.GetPaidState());
         }
 
         public void CancelOrder()
         {
-            this._order.CancelOrder();
             this._order.SetState(this._order.GetCancelledState());
         }
     }

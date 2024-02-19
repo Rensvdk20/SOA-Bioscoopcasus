@@ -1,5 +1,4 @@
 ﻿using SOA_BioscoopCasus.Domain;
-using SOA_BioscoopCasus.States;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,6 +28,8 @@ namespace SOA_BioscoopCasus.Interfaces
         void CancelOrder();
 
         void Export();
+
+        IOrderState GetCurrentState();
 
         IOrderState GetCancelledState();
 
