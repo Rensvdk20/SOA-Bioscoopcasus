@@ -7,8 +7,8 @@ namespace SOA_BioscoopCasus.Behaviours
     {
         public void export(Order order)
         {
-            Console.WriteLine($"Order Number: {order.getOrderNr()}");
-            foreach (MovieTicket ticket in order.getTickets())
+            Console.WriteLine($"Order Number: {order.GetOrderNr()}");
+            foreach (MovieTicket ticket in order.GetTickets())
             {
                 Console.WriteLine($"Ticket: {ticket.toString()}");
             }
