@@ -1,20 +1,18 @@
 ﻿using SOA_BioscoopCasus.Domain;
 using SOA_BioscoopCasus.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SOA_BioscoopCasus.Observer;
 
 namespace SOA_BioscoopCasus.States
 {
     public class CreatedState : IOrderState
     {
         private readonly IOrder _order;
+        private readonly Observable _observable;
 
-        public CreatedState(Order order)
+        public CreatedState(IOrder order, Observable observable)
         {
             _order = order;
+            _observable = observable;
         }
 
         public void AddSeatReservation(MovieTicket ticket)
@@ -24,7 +22,7 @@ namespace SOA_BioscoopCasus.States
 
         public void SubmitOrder()
         {
-            this._order.SetState(this._order.GetReservedState());
+            this._order.SetState(new ReservedState(_order, _observable));
         }
 
         public void PayOrder()
@@ -34,7 +32,7 @@ namespace SOA_BioscoopCasus.States
 
         public void CancelOrder()
         {
-            this._order.SetState(this._order.GetCancelledState());
+            this._order.SetState(new CancelledState(_order, _observable));
         }
     }
 }

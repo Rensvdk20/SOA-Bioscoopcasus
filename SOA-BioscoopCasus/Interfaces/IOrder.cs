@@ -31,12 +31,6 @@ namespace SOA_BioscoopCasus.Interfaces
 
         IOrderState GetCurrentState();
 
-        IOrderState GetCancelledState();
-
-        IOrderState GetCreatedState();
-
-        IOrderState GetPaidState();
-
-        IOrderState GetReservedState();
+        void Subscribe(ISubscriber subscriber);
     }
 }
