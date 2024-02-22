@@ -1,6 +1,7 @@
 ﻿using SOA_BioscoopCasus.Behaviours;
 using SOA_BioscoopCasus.Domain;
 using SOA_BioscoopCasus.Interfaces;
+using SOA_BioscoopCasus.Listeners;
 using SOA_BioscoopCasus.Rules;
 
 namespace SOA_BioscoopCasus
@@ -17,11 +18,13 @@ namespace SOA_BioscoopCasus
             };
 
             Order order1 = new Order(1, true, ticketPriceRules, new JsonExport()); // 12 | Student met oneven aantal premium tickets
+
+            order1.Subscribe(new SmsSubscriber());
             order1.AddSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix"), DateTime.Now, 10), 1, 1, true));
-            order1.AddSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix 2"), DateTime.Now, 12), 1, 1, true));
+            order1.AddSeatReservation(new MovieTicket(new MovieScreening(new Movie("The Matrix 2"), DateTime.Now, 12), 1, 2, true));
             order1.Export();
 
-            order1.PayOrder();
+            order1.SubmitOrder();
         }
     }
 }

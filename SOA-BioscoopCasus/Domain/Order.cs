@@ -1,5 +1,6 @@
 ﻿
 using SOA_BioscoopCasus.Interfaces;
+using SOA_BioscoopCasus.Observer;
 using SOA_BioscoopCasus.States;
 
 namespace SOA_BioscoopCasus.Domain
@@ -12,6 +13,7 @@ namespace SOA_BioscoopCasus.Domain
         private readonly IEnumerable<ITicketPriceRule> _ticketPriceRules = new List<ITicketPriceRule>();
         private readonly IExportStrategy _exportStrategy;
         private IOrderState _currentState; // Current state of the order
+        private Observable _observable = new Observable();
 
         public Order(int orderNr, bool isStudentOrder, IEnumerable<ITicketPriceRule> ticketPriceRule, IExportStrategy exportStrategy)
         {
@@ -19,7 +21,7 @@ namespace SOA_BioscoopCasus.Domain
             this._isStudentOrder = isStudentOrder;
             this._ticketPriceRules = ticketPriceRule;
             this._exportStrategy = exportStrategy;
-            this._currentState = new CreatedState(this); // Start in the "Created" state
+            this._currentState = new CreatedState(this , _observable); // Start in the "Created" state
         }
 
         public void SetState(IOrderState newState)
@@ -93,24 +95,9 @@ namespace SOA_BioscoopCasus.Domain
             return this._currentState;
         }
 
-        public IOrderState GetCancelledState()
+        public void Subscribe(ISubscriber subscriber)
         {
-            return new CancelledState(this);
-        }
-
-        public IOrderState GetCreatedState()
-        {
-            return new CreatedState(this);
-        }
-
-        public IOrderState GetPaidState()
-        {
-            return new PaidState(this);
-        }
-
-        public IOrderState GetReservedState()
-        {
-            return new ReservedState(this);
+            _observable.Subscribe(subscriber);
         }
     }
 }

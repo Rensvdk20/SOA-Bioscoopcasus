@@ -10,7 +10,7 @@
             this._title = title;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return this._title;
         }

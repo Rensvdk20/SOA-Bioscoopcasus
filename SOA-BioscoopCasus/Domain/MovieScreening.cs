@@ -22,7 +22,7 @@
             return _pricePerSeat;
         }
 
-        public string ToString()
+        public override string ToString()
         {
             return _movie.ToString();
         }
